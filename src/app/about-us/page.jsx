@@ -14,8 +14,7 @@ const AboutUsPage = async () => {
 
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/get-site-details`, {
-      next: { revalidate: 3600 }, // optional: revalidate every hour
-      cache: 'no-store',
+      next: { revalidate: 3600 }
     });
 
     const json = await res.json();
