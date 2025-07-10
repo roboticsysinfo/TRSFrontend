@@ -55,7 +55,7 @@ export default function SignIn() {
         <div className="card p-4 shadow-sm">
           <h3 className="text-start fw-bold">Sign In</h3>
           <p className="text-muted text-small text-start mb-4">
-            Access your account to manage and explore more.
+            Sign in to share your startup journey, update your profile, and connect with entrepreneurs across India.
           </p>
 
           <form onSubmit={handleSubmit}>
@@ -100,6 +100,9 @@ export default function SignIn() {
 
             <p className="text-center mb-0">
               Don&apos;t have an account? <Link href="/signup">Sign Up</Link>
+              <p className="text-muted text-small text-start mt-4">
+                Don’t have an account yet? Sign up now and join India’s most inspiring startup community.
+              </p>
             </p>
           </form>
         </div>

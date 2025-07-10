@@ -4,9 +4,9 @@ import PrivacyPolicyDetails from '@/components/about/PrivacyPolicyDetails';
 
 export const metadata = {
 
-  title: "Privacy Policy",
-  description: "",
-  keywords: ""
+  title: "Privacy Policy | True Real Story – Startup Stories Platform",
+  description: "Read True Real Story’s Privacy Policy to learn how we collect, use, and protect your data while sharing inspiring startup stories and founder journeys in India.",
+  keywords: "privacy policy, true real story privacy, startup story platform, data protection, startup founders, entrepreneur stories, data privacy India, startup community, safe storytelling, founder journeys"
 };
 
 

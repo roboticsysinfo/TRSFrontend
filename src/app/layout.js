@@ -20,13 +20,15 @@ import '@/assets/css/style.css';
 import Dependency from '@/components/utilities/Dependency';
 import { ToastContainer } from 'react-toastify';
 import { Manrope, Outfit } from 'next/font/google';
-import ReduxProvider from '@/redux/ReduxProvider'; 
+import ReduxProvider from '@/redux/ReduxProvider';
 
 const manrope = Manrope({ subsets: ['latin'] });
 const outfit = Outfit({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'The True Real Story',
+  title: 'True Real Story | India’s Top Real Startup Stories Platform',
+  description: "India’s most inspiring real startup stories, founder journeys, and business successes. True Real Story empowers and connects entrepreneurs across India.",
+  keywords: "startup stories, India startup stories, entrepreneur journeys, founder success stories, startup case studies, inspirational business stories, True Real Story, startup ecosystem India, business success India, startup founders "
 };
 
 export default function RootLayout({ children }) {

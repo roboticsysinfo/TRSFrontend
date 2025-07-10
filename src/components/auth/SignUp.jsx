@@ -40,12 +40,13 @@ export default function SignUp() {
   };
 
   return (
+    
     <div className="container d-flex align-items-center justify-content-center min-vh-100 my-5 py-5">
       <div className="w-100" style={{ maxWidth: 450 }}>
         <div className="card p-4 shadow-sm">
           <h3 className="text-start fw-bold">Sign Up</h3>
           <p className="text-muted text-small text-start mb-4">
-            Create your account to get started.
+            Create your account for free to list your company and connect with India’s entrepreneurs.
           </p>
 
           <form onSubmit={handleSubmit}>
@@ -126,6 +127,9 @@ export default function SignUp() {
 
             <p className="text-center mb-0">
               Already have an account? <Link href="/signin">Sign In</Link>
+            </p>
+            <p className="text-muted text-small text-start mb-4">
+              Already have an account? Sign in and continue your journey.
             </p>
           </form>
         </div>

@@ -4,7 +4,9 @@ import React from 'react';
 
 export const metadata = {
 
-    title: "Consua - Consulting Business - Blog 3 Column"
+    title: "Startup & Business Blogs | True Real Story India",
+    description: "Explore insightful blogs on startups, business growth, companies, and entrepreneurship in India. Learn, get inspired, and stay updated with True Real Story.",
+    keywords: "startup blogs, business blogs India, entrepreneurship articles, company growth tips, founder blogs, startup ecosystem, Indian business stories, True Real Story blogs, startup growth strategies, inspiring blogs India"
     
 }
 
