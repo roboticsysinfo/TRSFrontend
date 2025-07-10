@@ -3009,7 +3009,18 @@ p {
 }
 
 .breadcrum-shape img {
+	width: 100%;
 	height: 100%;
+	object-fit: cover;
+	object-position: top;
+}
+
+.breadcrum-shape::before {
+    background-color: #0000004f;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    content: "";
 }
 
 /* ============================================================== 

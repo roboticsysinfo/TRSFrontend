@@ -2,7 +2,7 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    domains: ['ik.imagekit.io'], // ✅ Allow external image domain
+    domains: ['ik.imagekit.io', "cdn-icons-png.flaticon.com"], // ✅ Allow external image domain
   },
 };
 

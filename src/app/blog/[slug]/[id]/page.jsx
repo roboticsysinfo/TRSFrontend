@@ -2,6 +2,7 @@ import React from 'react';
 import BlogDetail from '@/components/blog/BlogDetail';
 import LayoutStyle7 from '@/components/Layouts/LayoutStyle7';
 
+
 export async function generateMetadata({ params }) {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/single/blog/${params.id}`, {
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }) {
         };
     }
 }
+
 
 const BlogPage = async ({ params }) => {
     const { id } = params;

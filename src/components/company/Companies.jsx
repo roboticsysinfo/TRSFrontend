@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories } from '../../redux/slices/categorySlice';
 import { fetchCompanies } from '../../redux/slices/companySlice';
 import { FaSearch } from 'react-icons/fa';
+import Link from 'next/link';
+import slugify from 'slugify';
 
 export default function Companies() {
-  
+
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
   const { companies } = useSelector((state) => state.companies);
@@ -78,13 +80,17 @@ export default function Companies() {
                     <div className="card-body">
                       <div className="d-flex align-items-center justify-content-between mb-2">
                         <div className="d-flex align-items-center">
-                          <img
-                            src={company.logo || '/placeholder.png'}
-                            alt={company.name}
-                            style={{ width: 40, height: 40, objectFit: 'contain' }}
-                            className="me-2"
-                          />
-                          <h6 className="mb-0">{company.name}</h6>
+                          <Link href={`/company/${slugify(company.name, { lower: true })}/${company._id}`}>
+
+                            <img
+                              src={company.logo || '/placeholder.png'}
+                              alt={company.name}
+                              style={{ width: 40, height: 40, objectFit: 'contain' }}
+                              className="me-2"
+                            />
+                            <h6 className="mb-0">{company.name}</h6>
+
+                          </Link>
                         </div>
                         <span className="badge bg-secondary" style={{ letterSpacing: 0.9 }}>
                           {company.businessModel}
