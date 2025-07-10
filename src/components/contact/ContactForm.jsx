@@ -38,7 +38,7 @@ const ContactForm = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="form-group comments">
-                            <textarea className="form-control" id="comments" name="comments" placeholder="Tell Us About Project *" autoComplete='off' required></textarea>
+                            <textarea className="form-control" id="comments" name="comments" placeholder="Your Message *" autoComplete='off' required></textarea>
                         </div>
                     </div>
                 </div>
