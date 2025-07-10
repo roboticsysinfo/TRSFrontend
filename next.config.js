@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone', // ✅ ADD THIS LINE
+  output: 'standalone',
+  images: {
+    domains: ['ik.imagekit.io'], // ✅ Allow external image domain
+  },
 };
 
 module.exports = nextConfig;

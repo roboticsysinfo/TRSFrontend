@@ -5,6 +5,8 @@ import authReducer from '@/redux/slices/authSlice';
 import userReducer from "@/redux/slices/userSlice";
 import storyReducer from "@/redux/slices/storySlice";
 import siteDetailReducer from "@/redux/slices/siteDetailSlice"
+import blogReducer from "@/redux/slices/blogSlice"
+
 
 const store = configureStore({
 
@@ -14,7 +16,8 @@ const store = configureStore({
         auth: authReducer,
         user: userReducer,
         story: storyReducer,
-        siteDetail: siteDetailReducer
+        siteDetail: siteDetailReducer,
+        blog: blogReducer
     }
     
 });
