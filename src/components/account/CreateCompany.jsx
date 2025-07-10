@@ -1,0 +1,220 @@
+'use client';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createCompany } from '@/redux/slices/companySlice';
+import { fetchCategories } from '@/redux/slices/categorySlice';
+import { toast } from 'react-toastify';
+
+const CreateCompany = () => {
+
+    const dispatch = useDispatch();
+
+    const { loading } = useSelector((state) => state.companies);
+    const { categories } = useSelector((state) => state.categories);
+    const { user } = useSelector((state) => state.auth);
+
+    const userId = user?._id;
+
+    
+    const [formData, setFormData] = useState({
+        name: '',
+        about: '',
+        legalName: '',
+        headquarter: '',
+        foundingDate: '',
+        businessModel: '',
+        noOfEmployees: '',
+        category: '',
+        socialMedia: {
+            facebook: '',
+            instagram: '',
+            linkedin: '',
+            twitter: '',
+            googleMyBusiness: ''
+        },
+        coreTeam: [{ memberName: '', designation: '' }]
+    });
+
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, [dispatch]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        if (name.includes('socialMedia')) {
+            const field = name.split('.')[1];
+            setFormData((prev) => ({
+                ...prev,
+                socialMedia: {
+                    ...prev.socialMedia,
+                    [field]: value
+                }
+            }));
+        } else {
+            setFormData((prev) => ({ ...prev, [name]: value }));
+        }
+    };
+
+    const handleCoreTeamChange = (index, field, value) => {
+        const newTeam = [...formData.coreTeam];
+        newTeam[index][field] = value;
+        setFormData({ ...formData, coreTeam: newTeam });
+    };
+
+    const addTeamMember = () => {
+        setFormData({ ...formData, coreTeam: [...formData.coreTeam, { memberName: '', designation: '' }] });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const payload = {
+            ...formData,
+            user: userId,
+        };
+
+        const res = await dispatch(createCompany(payload));
+        if (res.meta.requestStatus === 'fulfilled') {
+            toast.success('Company created successfully!');
+            setFormData({
+                name: '',
+                about: '',
+                legalName: '',
+                headquarter: '',
+                foundingDate: '',
+                businessModel: '',
+                noOfEmployees: '',
+                category: '',
+                socialMedia: {
+                    facebook: '',
+                    instagram: '',
+                    linkedin: '',
+                    twitter: '',
+                    googleMyBusiness: ''
+                },
+                coreTeam: [{ memberName: '', designation: '' }]
+            });
+        } else {
+            toast.error(res.payload || 'Creation failed');
+        }
+    };
+
+    return (
+        <div className="container my-4">
+
+            <h4 className="fw-bold mb-3">List My Company</h4>
+
+            <hr />
+
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label className="form-label">Company Name</label>
+                    <input className="form-control" name="name" value={formData.name} onChange={handleChange} required />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Legal Name</label>
+                    <input className="form-control" name="legalName" value={formData.legalName} onChange={handleChange} required />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Headquarter</label>
+                    <input className="form-control" name="headquarter" value={formData.headquarter} onChange={handleChange} required />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Founding Date</label>
+                    <input type="date" className="form-control" name="foundingDate" value={formData.foundingDate} onChange={handleChange} required />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">About</label>
+                    <textarea className="form-control" name="about" value={formData.about} onChange={handleChange}></textarea>
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Business Model</label>
+                    <select className="form-select" name="businessModel" value={formData.businessModel} onChange={handleChange} required>
+                        <option value="">Select</option>
+                        <option value="B2C">B2C</option>
+                        <option value="B2B">B2B</option>
+                        <option value="B2B2C">B2B2C</option>
+                        <option value="D2C">D2C</option>
+                        <option value="C2C">C2C</option>
+                        <option value="B2G">B2G</option>
+                    </select>
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Number of Employees</label>
+                    <select className="form-select" name="noOfEmployees" value={formData.noOfEmployees} onChange={handleChange} required>
+                        <option value="">Select</option>
+                        <option value="0-10">0–10</option>
+                        <option value="10-100">10–100</option>
+                        <option value="100-1000">100–1,000</option>
+                        <option value="1000-100000">1,000–100,000</option>
+                    </select>
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Select Category</label>
+                    <select className="form-select" name="category" value={formData.category} onChange={handleChange} required>
+                        <option value="">Select Category</option>
+                        {categories?.map((cat) => (
+                            <option key={cat._id} value={cat._id}>
+                                {cat.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Social Media Links</label>
+                    <input className="form-control mb-2" name="socialMedia.facebook" placeholder="Facebook" value={formData.socialMedia.facebook} onChange={handleChange} />
+                    <input className="form-control mb-2" name="socialMedia.instagram" placeholder="Instagram" value={formData.socialMedia.instagram} onChange={handleChange} />
+                    <input className="form-control mb-2" name="socialMedia.linkedin" placeholder="LinkedIn" value={formData.socialMedia.linkedin} onChange={handleChange} />
+                    <input className="form-control mb-2" name="socialMedia.twitter" placeholder="Twitter" value={formData.socialMedia.twitter} onChange={handleChange} />
+                    <input className="form-control" name="socialMedia.googleMyBusiness" placeholder="Google My Business" value={formData.socialMedia.googleMyBusiness} onChange={handleChange} />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Core Team</label>
+                    {formData.coreTeam.map((member, index) => (
+                        <div key={index} className="mb-2 row">
+                            <div className="col">
+                                <input
+                                    type="text"
+                                    placeholder="Member Name"
+                                    className="form-control"
+                                    value={member.memberName}
+                                    onChange={(e) => handleCoreTeamChange(index, 'memberName', e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="col">
+                                <input
+                                    type="text"
+                                    placeholder="Designation"
+                                    className="form-control"
+                                    value={member.designation}
+                                    onChange={(e) => handleCoreTeamChange(index, 'designation', e.target.value)}
+                                    required
+                                />
+                            </div>
+                        </div>
+                    ))}
+                    <button type="button" className="btn btn-outline-secondary btn-sm mt-2" onClick={addTeamMember}>
+                        + Add Team Member
+                    </button>
+                </div>
+
+                <button type="submit" className="btn btn-primary" disabled={loading}>
+                    {loading ? 'Creating...' : 'Create Company'}
+                </button>
+            </form>
+        </div>
+    );
+};
+
+export default CreateCompany;

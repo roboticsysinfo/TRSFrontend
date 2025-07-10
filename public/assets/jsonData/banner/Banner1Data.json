@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "bgThumb": "1.jpg",
+        "title": "Meet Consulting",
+        "title1": "Financial Analysis",
+        "title2": "Developing Meeting.",
+        "btnText": "Our Services",
+        "shapeThumb": "4.png",
+        "videoId": "owhuBrGIOsEdsk"
+    },
+    {
+        "id": 2,
+        "bgThumb": "6.jpg",
+        "title": "Coaching & Consulting",
+        "title1": "Strategies for",
+        "title2": "Enduring Success",
+        "btnText": "Our Services",
+        "shapeThumb": "4.png",
+        "videoId": "owhuBrGIOsEdsk"
+    }
+]
