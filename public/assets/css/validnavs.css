@@ -195,7 +195,7 @@ a.accountBtn:hover {
 
 .navbar-brand>img {
 	display: block;
-	max-height: 60px;
+	max-height: 100px;
 }
 
 .navbar-toggle {

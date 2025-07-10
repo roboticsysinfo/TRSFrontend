@@ -7,7 +7,7 @@ import useSidebarMenu from "../hooks/useSidebarMenu";
 import HeaderLogo from "./HeaderLogo";
 import useSubMenuToggle from "../hooks/useSubMenuToggle";
 import Link from "next/link";
-import logo from "@/assets/img/logo.png";
+import logo from "@/assets/img/logo-header.png";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
@@ -16,6 +16,7 @@ import { FaUser, FaSignOutAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
 const MainHeaderStyle7 = () => {
+
     const isMenuSticky = useStickyMenu();
     const toggleSubMenu = useSubMenuToggle();
     const { isOpen, openMenu, closeMenu } = useSidebarMenu();
