@@ -16,7 +16,7 @@ const page = async () => {
 
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/get-site-details`, {
-      next: { revalidate: 3600 }
+      next: { revalidate: 60 }
     });
 
     const json = await res.json();

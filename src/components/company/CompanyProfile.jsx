@@ -18,7 +18,7 @@ const CompanyProfile = ({ company }) => {
                     <div className="d-flex justify-content-between align-items-start">
 
                         <div className="d-flex align-items-start">
-                            
+
                             <div className="me-3 rounded-circle overflow-hidden" style={{ width: 60, height: 60, position: 'relative' }}>
                                 <Image
                                     src={
@@ -31,7 +31,6 @@ const CompanyProfile = ({ company }) => {
                                     className="object-contain"
                                 />
                             </div>
-
 
                             <div>
 
