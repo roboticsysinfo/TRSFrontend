@@ -16,15 +16,15 @@ Version: 1.0
 }
 
 a.accountBtn {
-    padding: 8px 30px;
-    background-color: #df0a0a !important;
-    border-radius: 6px;
-    color: #fff !important;
-    margin-right: 10px;
+	padding: 8px 30px;
+	background-color: #df0a0a !important;
+	border-radius: 6px;
+	color: #fff !important;
+	margin-right: 10px;
 }
 
 a.accountBtn:hover {
-    background: #212529 !important;
+	background: #212529 !important;
 }
 
 /* Default for supporting bootstrap */
@@ -3362,3 +3362,38 @@ nav.navbar.validnavs .navbar-collapse.collapse button i {
 .dropdown.on>.dropdown-menu {
 	display: block;
 }
+
+.featured-stories{
+	position: relative;
+}
+
+.featured-stories::before {
+	content: "";
+	display: block;
+	height: 380px;
+	left: 0;
+	position: absolute;
+	top: 0%;
+	width: 100%;
+	z-index: -1;
+	background: #dc3545bd;
+}
+
+
+.startup-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.startup-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.story-img {
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px 0 0 12px;
+}
+

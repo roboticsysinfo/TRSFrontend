@@ -78,7 +78,7 @@ const FooterStyle1 = ({ shape, shapeClass, logo, formStyle }) => {
                                     <h4 className="widget-title">Our Services</h4>
                                     <ul>
                                         <li>
-                                            <Link href="/account/list-your-company">List Startup</Link>
+                                            <Link href="/account/list-my-company">List Startup</Link>
                                         </li>
                                         <li>
                                             <Link href="/account">Account</Link>

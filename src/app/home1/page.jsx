@@ -1,35 +1,25 @@
 import LayoutStyle7 from '@/components/Layouts/LayoutStyle7';
-import AboutStyle1 from '@/components/about/AboutStyle1';
-import BannerStyle1 from '@/components/banner/BannerStyle1';
 import BlogStyle1 from '@/components/blog/BlogStyle1';
-import ChooseStyle1 from '@/components/choose/ChooseStyle1';
-import PartnerStyle1 from '@/components/partner/PartnerStyle1';
-import ProcessStyle1 from '@/components/process/ProcessStyle1';
-import ProjectStyle1 from '@/components/project/ProjectStyle1';
-import RequestCallStyle1 from '@/components/request/RequestCallStyle1';
-import ServicesStyle1 from '@/components/services/ServicesStyle1';
-import TeamStyle1 from '@/components/team/TeamStyle1';
-import TestimonialStyle1 from '@/components/testimonial/TestimonialStyle1';
+import FeaturedStartupStories from '@/components/home/FeaturedStartupStories';
+import StorySlider from '@/components/home/StorySlider';
+
 import React from 'react';
 
 export const metadata = {
-    title: "Consua - Consulting Business React-NextJS Template"
+    title: 'True Real Story | India’s Top Real Startup Stories Platform',
+    description: "India’s most inspiring real startup stories, founder journeys, and business successes. True Real Story empowers and connects entrepreneurs across India.",
+    keywords: "startup stories, India startup stories, entrepreneur journeys, founder success stories, startup case studies, inspirational business stories, True Real Story, startup ecosystem India, business success India, startup founders "
 }
 
 const Home1 = () => {
     return (
         <>
             <LayoutStyle7>
-                <BannerStyle1 />
-                <AboutStyle1 />
-                <ServicesStyle1 />
-                <ProcessStyle1 />
-                <ChooseStyle1 />
-                <PartnerStyle1 sectionClass="default-padding" />
-                <TeamStyle1 sectionClass="bg-gray" teamTitle={true} />
-                <ProjectStyle1 />
-                <RequestCallStyle1 />
-                <TestimonialStyle1 />
+
+                <StorySlider sectionClass="featured-stories" />
+
+                <FeaturedStartupStories />
+
                 <BlogStyle1 sectionClass="bg-gray" />
             </LayoutStyle7>
         </>
