@@ -106,11 +106,15 @@ const AllStories = () => {
                               {new Date(story.createdAt).toLocaleDateString('en-IN')}
                             </small>
                             <h6 className="fw-bold">{story.title}</h6>
-                            <p className="card-text">
-                              {story.description.length > 100
-                                ? `${story.description.slice(0, 100)}...`
-                                : story.description}
-                            </p>
+                            <div
+                              className="card-text"
+                              dangerouslySetInnerHTML={{
+                                __html: story.description.length > 150
+                                  ? `${story.description.slice(0, 150)}...`
+                                  : story.description
+                              }}
+                            />
+
                             <span className="badge bg-light text-danger fw-semibold">
                               {story.category?.name || 'Story'}
                             </span>

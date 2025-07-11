@@ -27,7 +27,11 @@ const StoryDetail = ({ story }) => {
                 {dayjs(story.createdAt).format('DD/MM/YYYY')} |{' '}
                 <span className="text-danger fw-bold">{category?.name}</span>
               </div>
-              <p className="lead">{description}</p>
+              <div
+                className="lead"
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
+
             </div>
           </div>
         </div>
