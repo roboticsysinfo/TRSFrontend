@@ -99,11 +99,9 @@ export default function SignIn() {
             </div>
 
             <p className="text-center mb-0">
-              Don&apos;t have an account? <Link href="/signup">Sign Up</Link>
-              <p className="text-muted text-small text-start mt-4">
-                Don’t have an account yet? Sign up now and join India’s most inspiring startup community.
-              </p>
+              Don&apos;t  have an account yet? <Link href="/signup">Sign up </Link> now and join India’s most inspiring startup community.
             </p>
+            
           </form>
         </div>
       </div>
