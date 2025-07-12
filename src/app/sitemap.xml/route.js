@@ -16,7 +16,7 @@ export async function GET() {
     <loc>${baseUrl}/sitemap-companies.xml</loc>
   </sitemap>
     <sitemap>
-    <loc>${baseUrl}/startup-stories.xml</loc>
+    <loc>${baseUrl}/sitemap-startup-stories.xml</loc>
   </sitemap>
 </sitemapindex>`;
 

@@ -8,4 +8,4 @@ Sitemap: https://truerealstory.com/sitemap-pages.xml
 Sitemap: https://truerealstory.com/sitemap-blogs.xml
 Sitemap: https://truerealstory.com/sitemap-stories.xml
 Sitemap: https://truerealstory.com/sitemap-companies.xml
-Sitemap: https://truerealstory.com/startup-stories.xml
+Sitemap: https://truerealstory.com/sitemap-startup-stories.xml
