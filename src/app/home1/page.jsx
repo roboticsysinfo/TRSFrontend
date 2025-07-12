@@ -2,6 +2,7 @@ import LayoutStyle7 from '@/components/Layouts/LayoutStyle7';
 import BlogStyle1 from '@/components/blog/BlogStyle1';
 import FeaturedStartupStories from '@/components/home/FeaturedStartupStories';
 import StorySlider from '@/components/home/StorySlider';
+import TagContent from '@/components/home/TagContent';
 
 import React from 'react';
 
@@ -16,9 +17,12 @@ const Home1 = () => {
         <>
             <LayoutStyle7>
 
-                <StorySlider sectionClass="featured-stories" />
+                <TagContent sectionClass="home-section" />
 
                 <FeaturedStartupStories />
+
+                <StorySlider sectionClass="featured-stories" />
+
 
                 <BlogStyle1 sectionClass="bg-gray" />
             </LayoutStyle7>

@@ -61,7 +61,12 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
         />
+        <link
+          rel="canonical"
+          href="https://truerealstory.com"
+        />
       </head>
+
       <body className={`${outfit.className} ${manrope.className}`}>
         <ReduxProvider>
           <ToastContainer />
