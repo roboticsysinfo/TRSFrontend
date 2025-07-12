@@ -1,4 +1,4 @@
-// app/layout.js or app/layout.tsx
+// app/layout.js
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'swiper/css';
 import 'swiper/css/bundle';
@@ -27,13 +27,41 @@ const outfit = Outfit({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'True Real Story | India’s Top Real Startup Stories Platform',
-  description: "India’s most inspiring real startup stories, founder journeys, and business successes. True Real Story empowers and connects entrepreneurs across India.",
-  keywords: "startup stories, India startup stories, entrepreneur journeys, founder success stories, startup case studies, inspirational business stories, True Real Story, startup ecosystem India, business success India, startup founders "
+  description:
+    "India’s most inspiring real startup stories, founder journeys, and business successes. True Real Story empowers and connects entrepreneurs across India.",
+  keywords:
+    "startup stories, India startup stories, entrepreneur journeys, founder success stories, startup case studies, inspirational business stories, True Real Story, startup ecosystem India, business success India, startup founders ",
+};
+
+const schemaMarkup = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "True Real Story",
+  "url": "https://truerealstory.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://truerealstory.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "True Real Story",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://truerealstory.com/logo.png" // 🔁 Replace with actual logo URL
+    }
+  }
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+        />
+      </head>
       <body className={`${outfit.className} ${manrope.className}`}>
         <ReduxProvider>
           <ToastContainer />
