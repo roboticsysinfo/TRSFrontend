@@ -3416,3 +3416,12 @@ h2 {
   border-radius: 12px 0 0 12px;
 }
 
+.slick-next:before, .slick-prev:before {
+    font-family: slick;
+    font-size: 40px !important;
+    line-height: 1;
+    opacity: .75;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
