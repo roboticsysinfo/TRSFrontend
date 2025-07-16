@@ -61,6 +61,10 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
         />
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9556130869557106"
+          crossorigin="anonymous"></script>
+
         <link
           rel="canonical"
           href="https://truerealstory.com"
