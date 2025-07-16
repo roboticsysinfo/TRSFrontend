@@ -7,23 +7,19 @@ import Link from 'next/link';
 import slugify from 'slugify';
 
 const UserStories = () => {
-
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const userId = user?._id;
-
 
   const { stories, totalPages, currentPage, loading } = useSelector((state) => state.story);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
 
-  
   useEffect(() => {
     if (userId) {
       dispatch(getStoriesByUserId({ userId, page, search }));
     }
   }, [dispatch, userId, page, search]);
-
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -36,13 +32,18 @@ const UserStories = () => {
   };
 
   return (
-
     <div className="container py-4">
+      {/* 🔹 Heading and Add Button */}
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h4 className="fw-bold text-dark mb-0">Your Stories</h4>
+        <Link href="/account/add-story" className="btn btn-danger">
+          + Add Story
+        </Link>
+      </div>
 
-      <h4 className="mb-4 fw-bold text-dark">Your Stories</h4>
       <hr />
 
-      {/* Search Form */}
+      {/* 🔍 Search Form */}
       <form onSubmit={handleSearch} className="mb-4">
         <div className="row g-2">
           <div className="col-md-10">
@@ -62,7 +63,7 @@ const UserStories = () => {
         </div>
       </form>
 
-      {/* Loader */}
+      {/* 🔄 Loader */}
       {loading ? (
         <div className="text-center py-4">
           <div className="spinner-border text-danger" role="status"></div>
@@ -107,7 +108,7 @@ const UserStories = () => {
         </div>
       )}
 
-      {/* Pagination */}
+      {/* 📄 Pagination */}
       {totalPages > 1 && (
         <nav className="mt-4 d-flex justify-content-center">
           <ul className="pagination">
