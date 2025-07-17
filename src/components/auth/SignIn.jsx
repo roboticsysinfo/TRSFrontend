@@ -18,21 +18,23 @@ export default function SignIn() {
   const router = useRouter();
   const { loading, error } = useSelector((state) => state.auth);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const res = await dispatch(signinUser({ email, password }));
 
     if (res.meta.requestStatus === "fulfilled") {
-      const { user } = res.payload;
+      const { token, user } = res.payload;
 
       const options = {
         path: "/",
         maxAge: 60 * 60 * 24 * 7, // 7 days
       };
 
-      // ✅ No need to set token manually
+      if (token) {
+        setCookie("token", token, options);
+      }
+
       if (user) {
         setCookie("user", JSON.stringify(user), options);
         setCookie("userId", user._id, options);
@@ -99,7 +101,7 @@ export default function SignIn() {
             <p className="text-center mb-0">
               Don&apos;t  have an account yet? <Link href="/signup">Sign up </Link> now and join India’s most inspiring startup community.
             </p>
-
+            
           </form>
         </div>
       </div>
