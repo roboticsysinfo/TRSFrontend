@@ -17,13 +17,13 @@ import '@/assets/css/helper.css';
 import '@/assets/css/unit-test.css';
 import '@/assets/css/style.css';
 
-import Dependency from '@/components/utilities/Dependency';
 import { ToastContainer } from 'react-toastify';
 import { Manrope, Outfit } from 'next/font/google';
 import ReduxProvider from '@/redux/ReduxProvider';
+import Dependency from '@/components/utilities/Dependency';
 
-const manrope = Manrope({ subsets: ['latin'] });
-const outfit = Outfit({ subsets: ['latin'] });
+const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
+const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
 
 export const metadata = {
   title: 'True Real Story | India’s Top Real Startup Stories Platform',
@@ -31,47 +31,67 @@ export const metadata = {
     "India’s most inspiring real startup stories, founder journeys, and business successes. True Real Story empowers and connects entrepreneurs across India.",
   keywords:
     "startup stories, India startup stories, entrepreneur journeys, founder success stories, startup case studies, inspirational business stories, True Real Story, startup ecosystem India, business success India, startup founders ",
-};
-
-const schemaMarkup = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "True Real Story",
-  "url": "https://truerealstory.com",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://truerealstory.com/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
+  metadataBase: new URL('https://truerealstory.com'),
+  alternates: {
+    canonical: '/',
   },
-  "publisher": {
-    "@type": "Organization",
-    "name": "True Real Story",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://truerealstory.com/logo.png" // 🔁 Replace with actual logo URL
-    }
-  }
+  other: {
+    'google-site-verification': 'your-google-verification-code',
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${manrope.variable} ${outfit.variable}`}>
       <head>
+        {/* Structured Data JSON-LD */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "True Real Story",
+              url: "https://truerealstory.com",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://truerealstory.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "True Real Story",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://truerealstory.com/logo.png"
+                }
+              }
+            }),
+          }}
         />
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9556130869557106"
-          crossorigin="anonymous"></script>
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9556130869557106"
+          crossOrigin="anonymous"
+        />
 
-        <link
-          rel="canonical"
-          href="https://truerealstory.com"
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-N55KGQVSN4"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-N55KGQVSN4');
+            `,
+          }}
         />
       </head>
 
-      <body className={`${outfit.className} ${manrope.className}`}>
+      <body className="bg-white text-black">
         <ReduxProvider>
           <ToastContainer />
           <Dependency />
