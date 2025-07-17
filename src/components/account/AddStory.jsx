@@ -37,14 +37,17 @@ const AddStory = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-
   useEffect(() => {
     if (message) {
-      toast.success(message);
+      toast.success(
+        'Thank you! Your story has been submitted successfully. It will appear in the admin panel for review. Once approved by our team, it will be published publicly.',
+        { autoClose: 7000 }
+      );
       dispatch(clearStoryMessage());
       setFormData({ title: '', description: '', category: '' });
       setStoryImage(null);
     }
+
     if (error) {
       toast.error(error);
       dispatch(clearStoryMessage());
