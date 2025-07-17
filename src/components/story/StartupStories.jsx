@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 const StartupStories = () => {
   const dispatch = useDispatch();
-  const { stories, totalPages, loading } = useSelector(state => state.story);
+  const { startupStories: stories, totalPages, loading } = useSelector(state => state.story);
 
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
@@ -27,7 +27,7 @@ const StartupStories = () => {
       {/* Search bar */}
       <div className="row justify-content-center mb-60">
         <div className="col-md-6">
-          <form onSubmit={handleSearch} className="input-group p-3 bg-danger shadow-sm" style={{borderRadius: 8}}>
+          <form onSubmit={handleSearch} className="input-group p-3 bg-danger shadow-sm" style={{ borderRadius: 8 }}>
             <span className="input-group-text bg-white border-end-0 rounded-start-pill">
               <i className="fa fa-search text-danger"></i>
             </span>

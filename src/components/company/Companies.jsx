@@ -8,15 +8,13 @@ import Link from 'next/link';
 import slugify from 'slugify';
 
 export default function Companies() {
-
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
   const { companies } = useSelector((state) => state.companies);
 
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-
-  console.log("companies", companies);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -26,11 +24,13 @@ export default function Companies() {
   const visibleCategories = showAllCategories ? categories : categories.slice(0, 50);
 
   const filteredCompanies = companies
-    .filter(company => company.isVerified) // ✅ Only verified companies
+    .filter(company => company.isVerified)
     .filter(company =>
       company.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter(company =>
+      selectedCategoryId ? company.category?._id === selectedCategoryId : true
     );
-
 
   return (
     <>
@@ -59,11 +59,30 @@ export default function Companies() {
           {/* Left Sidebar - Categories */}
           <div className="col-md-2 mb-4">
             <h5 className="mb-3">Categories</h5>
+
+            {/* "All" Category */}
+            <span
+              className={`badge me-2 mb-2 p-2 d-inline-block ${!selectedCategoryId ? 'bg-danger text-white' : 'bg-light text-dark'}`}
+              style={{ cursor: 'pointer' }}
+              onClick={() => setSelectedCategoryId(null)}
+            >
+              All
+            </span>
+
+            {/* Dynamic Categories */}
             {visibleCategories.map((cat, i) => (
-              <span key={i} className="badge bg-light text-dark me-2 mb-2 p-2 d-inline-block">
+              <span
+                key={i}
+                className={`badge me-2 mb-2 p-2 d-inline-block ${selectedCategoryId === cat._id ? 'bg-danger text-white' : 'bg-light text-dark'}`}
+                style={{ cursor: 'pointer' }}
+                onClick={() =>
+                  setSelectedCategoryId(selectedCategoryId === cat._id ? null : cat._id)
+                }
+              >
                 {cat.name}
               </span>
             ))}
+
             {categories.length > 50 && (
               <button
                 onClick={() => setShowAllCategories(!showAllCategories)}
@@ -83,23 +102,26 @@ export default function Companies() {
                     <div className="card-body">
                       <div className="d-flex align-items-center justify-content-between mb-2">
                         <div className="d-flex align-items-center">
-                          <Link href={`/company/${slugify(company.name, { lower: true })}/${company._id}`}>
-
+                          <Link
+                            href={`/company/${slugify(company.name, { lower: true })}/${company._id}`}
+                            // style={{ display: 'flex', alignItems: 'center' }}
+                          >
                             <img
                               src={company.logo || '/placeholder.png'}
                               alt={company.name}
-                              style={{ width: 40, height: 40, objectFit: 'contain' }}
+                              style={{ width: 80, height: 80, objectFit: 'contain', borderWidth: 1, borderColor: "#ddd" }}
                               className="me-2"
                             />
-                            <h6 className="mb-0">{company.name}</h6>
-
+                            <h5 className="mb-0">{company.name}</h5>
                           </Link>
                         </div>
                         <span className="badge bg-secondary" style={{ letterSpacing: 0.9 }}>
                           {company.businessModel}
                         </span>
                       </div>
-                      <p className="text-muted small mb-2">{company.about}</p>
+                      <p className="text-muted small mb-2 about-text">
+                        {company.about?.split(' ').slice(0, 50).join(' ')}
+                      </p>
                       <div className="mb-2">
                         {company.category?.name && (
                           <span className="badge bg-light text-dark me-2 mb-2 d-inline-block">

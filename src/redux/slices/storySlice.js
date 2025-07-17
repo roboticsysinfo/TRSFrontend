@@ -181,19 +181,20 @@ const storySlice = createSlice({
       .addCase(getStartupStories.pending, (state) => {
         state.loading = true;
       })
+
       .addCase(getStartupStories.fulfilled, (state, action) => {
         state.loading = false;
-        state.startupStories = action.payload;
-        state.total = action.payload.total;
-        state.currentPage = action.payload.currentPage;
-        state.totalPages = action.payload.totalPages;
+        state.startupStories = action.payload.data.stories;
+        state.total = action.payload.data.total;
+        state.currentPage = action.payload.data.currentPage;
+        state.totalPages = action.payload.data.totalPages;
       })
 
       .addCase(getStartupStories.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || 'Failed to fetch startup stories';
       });
-  }
+}
 });
 
 export const { clearStoryMessage } = storySlice.actions;
