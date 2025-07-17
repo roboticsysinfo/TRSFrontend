@@ -72,12 +72,12 @@ const StartupStories = () => {
                         <small className="text-muted d-block mb-1">
                           {new Date(story.createdAt).toLocaleDateString('en-IN')}
                         </small>
-                        <h6 className="fw-bold">{story.title}</h6>
+                        <h5 className="fw-bold">{story.title}</h5>
                         <div
                           className="card-text"
                           dangerouslySetInnerHTML={{
-                            __html: story.description.length > 150
-                              ? `${story.description.slice(0, 150)}...`
+                            __html: story.description.length > 80
+                              ? `${story.description.slice(0, 80)}...`
                               : story.description
                           }}
                         />
