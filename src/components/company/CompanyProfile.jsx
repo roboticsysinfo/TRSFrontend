@@ -1,5 +1,6 @@
 'use client';
 
+import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -89,7 +90,11 @@ const CompanyProfile = ({ company }) => {
                             <li><strong>Legal Name:</strong> {company?.legalName || '-'}</li>
                             <li><strong>Business Model:</strong> {company?.businessModel || '-'}</li>
                             <li><strong>Employees:</strong> {company?.noOfEmployees || '-'}</li>
-                            <li><strong>Founded:</strong> {company?.foundingDate || '-'}</li>
+                            <li>
+                                <strong>Founded:</strong>{' '}
+                                {company?.foundingDate ? dayjs(company.foundingDate).format('D MMMM YYYY') : '-'}
+                            </li>
+
                         </ul>
                     </div>
                 </div>
