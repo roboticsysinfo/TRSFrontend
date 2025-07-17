@@ -6,7 +6,7 @@ export const getUserById = createAsyncThunk(
   'user/getUserById',
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.get(`/users/get-user-by-id/${id}`);
+      const response = await axiosInstance.get(`/get-user-by-id/${id}`);
       return response.data.data;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || err.message);
@@ -19,7 +19,9 @@ export const updateUser = createAsyncThunk(
   'user/updateUser',
   async ({ id, userData }, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.put(`/users/update-user/${id}`, userData);
+      const response = await axiosInstance.put(`/update-user/${id}`, userData, {
+         headers: { 'Content-Type': 'multipart/form-data' }
+      });
       return response.data.data;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || err.message);
@@ -32,7 +34,7 @@ export const deleteUser = createAsyncThunk(
   'user/deleteUser',
   async (id, { rejectWithValue }) => {
     try {
-      await axiosInstance.delete(`/users/delete-user/${id}`);
+      await axiosInstance.delete(`/delete-user/${id}`);
       return id; // return ID of deleted user
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || err.message);

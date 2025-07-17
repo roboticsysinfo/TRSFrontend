@@ -16,6 +16,8 @@ export default function Companies() {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
+  console.log("companies", companies);
+
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchCompanies());
@@ -28,6 +30,7 @@ export default function Companies() {
     .filter(company =>
       company.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
 
   return (
     <>

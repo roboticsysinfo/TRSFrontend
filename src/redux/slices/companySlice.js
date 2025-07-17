@@ -9,7 +9,9 @@ export const createCompany = createAsyncThunk(
   'company/create',
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axiosInstance.post('/list-compnay', payload);
+      const res = await axiosInstance.post('/list-compnay', payload, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
       return res.data.data;
     } catch (err) {
       return rejectWithValue(err.response.data.message || 'Create failed');
@@ -69,7 +71,9 @@ export const updateCompany = createAsyncThunk(
   'company/update',
   async ({ id, updateData }, { rejectWithValue }) => {
     try {
-      const res = await axiosInstance.put(`/update/company/${id}`, updateData);
+      const res = await axiosInstance.put(`/update/company/${id}`, updateData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
       return res.data.data;
     } catch (err) {
       return rejectWithValue(err.response.data.message || 'Update failed');

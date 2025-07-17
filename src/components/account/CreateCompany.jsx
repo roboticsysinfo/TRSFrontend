@@ -4,18 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createCompany } from '@/redux/slices/companySlice';
 import { fetchCategories } from '@/redux/slices/categorySlice';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 const CreateCompany = () => {
 
     const dispatch = useDispatch();
-
+    const router = useRouter();
     const { loading } = useSelector((state) => state.companies);
     const { categories } = useSelector((state) => state.categories);
     const { user } = useSelector((state) => state.auth);
-
     const userId = user?._id;
 
-    
     const [formData, setFormData] = useState({
         name: '',
         about: '',
@@ -25,12 +24,14 @@ const CreateCompany = () => {
         businessModel: '',
         noOfEmployees: '',
         category: '',
+        logo: null,
         socialMedia: {
             facebook: '',
             instagram: '',
             linkedin: '',
             twitter: '',
-            googleMyBusiness: ''
+            googleMyBusiness: '',
+            website: ''
         },
         coreTeam: [{ memberName: '', designation: '' }]
     });
@@ -40,9 +41,11 @@ const CreateCompany = () => {
     }, [dispatch]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, files } = e.target;
 
-        if (name.includes('socialMedia')) {
+        if (name === 'logo') {
+            setFormData((prev) => ({ ...prev, logo: files[0] }));
+        } else if (name.includes('socialMedia')) {
             const field = name.split('.')[1];
             setFormData((prev) => ({
                 ...prev,
@@ -69,12 +72,27 @@ const CreateCompany = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const payload = {
-            ...formData,
-            user: userId,
-        };
+        const data = new FormData();
+        data.append('name', formData.name);
+        data.append('about', formData.about);
+        data.append('legalName', formData.legalName);
+        data.append('headquarter', formData.headquarter);
+        data.append('foundingDate', formData.foundingDate);
+        data.append('businessModel', formData.businessModel);
+        data.append('noOfEmployees', formData.noOfEmployees);
+        data.append('category', formData.category);
+        data.append('user', userId);
+        if (formData.logo) {
+            data.append('logo', formData.logo);
+        }
 
-        const res = await dispatch(createCompany(payload));
+        // Social media as JSON
+        data.append('socialMedia', JSON.stringify(formData.socialMedia));
+
+        // Core team as JSON
+        data.append('coreTeam', JSON.stringify(formData.coreTeam));
+
+        const res = await dispatch(createCompany(data));
         if (res.meta.requestStatus === 'fulfilled') {
             toast.success('Company created successfully!');
             setFormData({
@@ -86,15 +104,18 @@ const CreateCompany = () => {
                 businessModel: '',
                 noOfEmployees: '',
                 category: '',
+                logo: null,
                 socialMedia: {
                     facebook: '',
                     instagram: '',
                     linkedin: '',
                     twitter: '',
-                    googleMyBusiness: ''
+                    googleMyBusiness: '',
+                    website: ''
                 },
                 coreTeam: [{ memberName: '', designation: '' }]
             });
+            router.push('/account')
         } else {
             toast.error(res.payload || 'Creation failed');
         }
@@ -102,12 +123,15 @@ const CreateCompany = () => {
 
     return (
         <div className="container my-4">
-
             <h4 className="fw-bold mb-3">List My Company</h4>
-
             <hr />
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
 
-            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label className="form-label">Company Logo</label>
+                    <input type='file' className="form-control" name="logo" onChange={handleChange} required />
+                </div>
+
                 <div className="mb-3">
                     <label className="form-label">Company Name</label>
                     <input className="form-control" name="name" value={formData.name} onChange={handleChange} required />
@@ -175,7 +199,8 @@ const CreateCompany = () => {
                     <input className="form-control mb-2" name="socialMedia.instagram" placeholder="Instagram" value={formData.socialMedia.instagram} onChange={handleChange} />
                     <input className="form-control mb-2" name="socialMedia.linkedin" placeholder="LinkedIn" value={formData.socialMedia.linkedin} onChange={handleChange} />
                     <input className="form-control mb-2" name="socialMedia.twitter" placeholder="Twitter" value={formData.socialMedia.twitter} onChange={handleChange} />
-                    <input className="form-control" name="socialMedia.googleMyBusiness" placeholder="Google My Business" value={formData.socialMedia.googleMyBusiness} onChange={handleChange} />
+                    <input className="form-control mb-2" name="socialMedia.googleMyBusiness" placeholder="Google My Business" value={formData.socialMedia.googleMyBusiness} onChange={handleChange} />
+                    <input className="form-control" name="socialMedia.website" placeholder="Website" value={formData.socialMedia.website} onChange={handleChange} />
                 </div>
 
                 <div className="mb-3">

@@ -6,16 +6,18 @@ import { fetchCompanyByUserId, updateCompany } from '@/redux/slices/companySlice
 import { toast } from 'react-hot-toast';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const MyCompany = () => {
     const dispatch = useDispatch();
+    const router = useRouter();
     const { user } = useSelector((state) => state.auth);
     const { userCompany, loading, error } = useSelector((state) => state.companies);
 
     const [editMode, setEditMode] = useState(false);
     const [formData, setFormData] = useState(null);
+    const [logo, setLogo] = useState(null);
     const [notFound, setNotFound] = useState(false);
-
 
     useEffect(() => {
         if (user?._id) {
@@ -33,8 +35,6 @@ const MyCompany = () => {
         }
     }, [user, dispatch]);
 
-
-
     useEffect(() => {
         if (userCompany) {
             setFormData({
@@ -51,15 +51,28 @@ const MyCompany = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleLogoChange = (e) => {
+        setLogo(e.target.files[0]);
     };
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        const res = await dispatch(updateCompany({ id: userCompany._id, updateData: formData }));
+
+        const updatePayload = new FormData();
+        for (const key in formData) {
+            updatePayload.append(key, formData[key]);
+        }
+        if (logo) updatePayload.append('logo', logo);
+
+        const res = await dispatch(updateCompany({ id: userCompany._id, updateData: updatePayload }));
+
         if (res.meta.requestStatus === 'fulfilled') {
             toast.success('Company updated successfully');
             setEditMode(false);
+            router.push('/account');
         } else {
             toast.error(res.payload || 'Update failed');
         }
@@ -70,17 +83,14 @@ const MyCompany = () => {
     if (notFound) {
         return (
             <div className="container mt-5 text-center">
-
                 <img src="/assets/img/company.svg" alt="Not Found" className="img-fluid" style={{ width: 300, height: 200 }} />
                 <h4 className="mt-4 fw-bold">Company Not Found</h4>
                 <p>You haven’t created a company yet.</p>
-
                 <button className="btn btn-sm btn-outline-primary">
-                    <Link href="/account/list-my-company" style={{ color: "#fff" }}>
+                    <Link href="/account/list-my-company" style={{ color: '#fff' }}>
                         List Your Startup
                     </Link>
                 </button>
-
             </div>
         );
     }
@@ -118,7 +128,7 @@ const MyCompany = () => {
                         </div>
                     </div>
                 ) : (
-                    <form onSubmit={handleUpdate}>
+                    <form onSubmit={handleUpdate} encType="multipart/form-data">
                         <div className="mb-3">
                             <label className="form-label">Company Name</label>
                             <input type="text" className="form-control" name="name" value={formData.name || ''} onChange={handleChange} required />
@@ -166,6 +176,16 @@ const MyCompany = () => {
                                 <option value="100-1000">100–1,000</option>
                                 <option value="1000-100000">1,000–100,000</option>
                             </select>
+                        </div>
+
+                        <div className="mb-3">
+                            <label className="form-label">Company Logo</label>
+                            <input type="file" accept="image/*" className="form-control" onChange={handleLogoChange} />
+                            {logo && (
+                                <div className="mt-2">
+                                    <img src={URL.createObjectURL(logo)} alt="Preview" style={{ height: '100px' }} />
+                                </div>
+                            )}
                         </div>
 
                         <div className="d-flex justify-content-between">
