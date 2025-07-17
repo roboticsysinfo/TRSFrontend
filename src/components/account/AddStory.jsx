@@ -42,7 +42,7 @@ const AddStory = () => {
   useEffect(() => {
     if (message) {
       toast.success(
-        'Thank you! Your story has been submitted successfully. It will appear in the admin panel for review. Once approved by our team, it will be published publicly.',
+        'Thank you! Your story has been submitted successfully. Once approved by our team, it will be published publicly.',
         {
           autoClose: 5000,
           onClose: () => router.push("/account"), // 👈 redirect after toast
