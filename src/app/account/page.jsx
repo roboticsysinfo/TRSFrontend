@@ -12,8 +12,6 @@ const page = () => {
 
   // ✅ Access cookies on the server
   const token = cookies().get("token")?.value;
-
-    console.log("account page token", token);
     
   if (!token) {
     redirect("/signin"); // ⛔ No token → redirect to signin

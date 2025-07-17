@@ -13,14 +13,18 @@ const StoryDetail = ({ story }) => {
       <div className="row justify-content-center">
         <div className="col-lg-10">
           <div className="card border-0 shadow">
+            
             {storyImage && (
               <img
                 src={storyImage}
                 className="card-img-top"
                 alt={title}
-                style={{ maxHeight: '420px', objectFit: 'cover' }}
+                style={{ maxHeight: '450px', objectFit: 'contain' }}
               />
             )}
+
+            <hr />
+
             <div className="card-body">
               <h3 className="fw-bold">{title}</h3>
               <div className="text-muted small mb-3">

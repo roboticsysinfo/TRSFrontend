@@ -16,9 +16,6 @@ const axiosInstance = axios.create({
 export const storeAuthData = (responseData) => {
   const { user, token } = responseData;
 
-  console.log("user axios", user);
-  console.log("user token", token);
-
   // ✅ DO NOT SET TOKEN IN JS COOKIES
 
   if (user) {

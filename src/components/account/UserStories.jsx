@@ -72,39 +72,48 @@ const UserStories = () => {
         <p className="text-muted">No stories found.</p>
       ) : (
         <div className="row g-4">
-          {stories.map((story) => (
-            <div className="col-md-4" key={story._id}>
-              <div className="card shadow-sm border-0 h-100">
-                <Link
-                  href={`/story/${createSlug(story.title)}/${story._id}`}
-                  className="text-decoration-none text-dark"
-                >
-                  <img
-                    src={story.storyImage || '/placeholder.jpg'}
-                    className="card-img-top"
-                    alt={story.title}
-                    style={{ height: '180px', objectFit: 'cover' }}
-                  />
-                  <div className="card-body">
-                    <small className="text-muted d-block mb-1">
-                      {new Date(story.createdAt).toLocaleDateString()}
-                    </small>
-                    <h5 className="card-title fw-bold" style={{ fontSize: '1rem' }}>
-                      {story.title}
-                    </h5>
-                    <p className="card-text" style={{ fontSize: '0.95rem' }}>
-                      {story.description.length > 100
-                        ? `${story.description.slice(0, 100)}...`
-                        : story.description}
-                    </p>
-                    <span className="badge bg-light text-danger fw-bold px-2 py-1">
-                      {story.category?.name || 'NEWS'}
-                    </span>
-                  </div>
-                </Link>
+          {stories
+            .filter((story) => story.isVerified)
+            .map((story) => (
+              <div className="col-md-4" key={story._id}>
+                <div className="card shadow-sm border-0 h-100">
+                  <Link
+                    href={`/story/${createSlug(story.title)}/${story._id}`}
+                    className="text-decoration-none text-dark"
+                  >
+                    <img
+                      src={story.storyImage || '/placeholder.jpg'}
+                      className="card-img-top"
+                      alt={story.title}
+                      style={{ height: '180px', objectFit: 'cover' }}
+                    />
+                    <div className="card-body">
+                      <small className="text-muted d-block mb-1">
+                        {new Date(story.createdAt).toLocaleDateString()}
+                      </small>
+                      <h5 className="card-title fw-bold" style={{ fontSize: '1rem' }}>
+                        {story.title}
+                      </h5>
+
+                      <div
+                        className="card-text"
+                        style={{ fontSize: '0.95rem' }}
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            story.description.length > 100
+                              ? `${story.description.slice(0, 100)}...`
+                              : story.description,
+                        }}
+                      ></div>
+
+                      <span className="badge bg-light text-danger fw-bold px-2 py-1">
+                        {story.category?.name || 'NEWS'}
+                      </span>
+                    </div>
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       )}
 

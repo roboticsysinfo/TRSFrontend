@@ -13,6 +13,7 @@ export const metadata = {
 }
 
 const Home1 = () => {
+
     return (
         <>
             <LayoutStyle7>
@@ -28,6 +29,8 @@ const Home1 = () => {
             </LayoutStyle7>
         </>
     );
+    
 };
+
 
 export default Home1;

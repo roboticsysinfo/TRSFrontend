@@ -27,10 +27,6 @@ const MainHeaderStyle7 = () => {
 
     useEffect(() => {
         const user = Cookies.get("user");
-
-        console.log("user in header", user);
-
-
         setIsLoggedIn(!!user);
     }, []);
 

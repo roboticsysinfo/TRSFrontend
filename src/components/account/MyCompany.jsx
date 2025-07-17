@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCompanyByUserId, updateCompany } from '@/redux/slices/companySlice';
+import { fetchCategories } from '@/redux/slices/categorySlice';
 import { toast } from 'react-hot-toast';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,7 +13,8 @@ const MyCompany = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     const { user } = useSelector((state) => state.auth);
-    const { userCompany, loading, error } = useSelector((state) => state.companies);
+    const { userCompany, loading } = useSelector((state) => state.companies);
+    const { categories } = useSelector((state) => state.categories);
 
     const [editMode, setEditMode] = useState(false);
     const [formData, setFormData] = useState(null);
@@ -33,6 +35,7 @@ const MyCompany = () => {
                 }
             });
         }
+        dispatch(fetchCategories());
     }, [user, dispatch]);
 
     useEffect(() => {
@@ -45,6 +48,7 @@ const MyCompany = () => {
                 foundingDate: userCompany.foundingDate?.split('T')[0],
                 businessModel: userCompany.businessModel,
                 noOfEmployees: userCompany.noOfEmployees,
+                category: userCompany.category?._id || '',
             });
         }
     }, [userCompany]);
@@ -175,6 +179,18 @@ const MyCompany = () => {
                                 <option value="10-100">10–100</option>
                                 <option value="100-1000">100–1,000</option>
                                 <option value="1000-100000">1,000–100,000</option>
+                            </select>
+                        </div>
+
+                        <div className="mb-3">
+                            <label className="form-label">Category</label>
+                            <select className="form-select" name="category" value={formData.category || ''} onChange={handleChange}>
+                                <option value="">Select</option>
+                                {categories.map((cat) => (
+                                    <option key={cat._id} value={cat._id}>
+                                        {cat.name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
 

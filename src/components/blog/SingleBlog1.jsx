@@ -8,9 +8,6 @@ const SingleBlog1 = ({ blog }) => {
 
     const slug = slugify(title, { lower: true });
 
-    console.log("home blog", blog);
-    
-
     return (
         <div className="col-xl-3 col-md-6 mb-30 wow fadeInUp" data-wow-delay={animationDelay}>
             <div className="blog-style-one">
