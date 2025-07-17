@@ -5,6 +5,7 @@ import Link from 'next/link';
 import {
     FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram,
     FaGoogle,
+    FaLink,
 } from 'react-icons/fa';
 
 const CompanyProfile = ({ company }) => {
@@ -53,6 +54,9 @@ const CompanyProfile = ({ company }) => {
                                     )}
                                     {company?.socialMedia?.googleMyBusiness && (
                                         <Link href={company.socialMedia.googleMyBusiness} target="_blank" className="text-muted fs-5"><FaGoogle /></Link>
+                                    )}
+                                    {company?.socialMedia?.website && (
+                                        <Link href={company.socialMedia.website} target="_blank" className="text-muted fs-5"><FaLink /> Website</Link>
                                     )}
 
                                 </div>
