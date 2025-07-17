@@ -31,9 +31,9 @@ export default function SignIn() {
         maxAge: 60 * 60 * 24 * 7, // 7 days
       };
 
-      // if (token) {
-      //   setCookie("token", token, options);
-      // }
+      if (token) {
+        setCookie("token", token, options);
+      }
 
       if (user) {
         setCookie("user", JSON.stringify(user), options);
