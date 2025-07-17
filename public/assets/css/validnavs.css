@@ -2562,9 +2562,11 @@ nav.navbar.validnavs.brand-center {
 @media (min-width: 1024px) {
 	nav.navbar ul.nav>li>a {
 		padding: 30px 15px;
-		font-weight: 500;
-		font-size: 17px;
+		font-weight: 600;
+		font-size: 16px;
 		text-transform: capitalize;
+		font-family: '__Outfit_d28b19';
+		letter-spacing: 0.5px;
 	}
 
 	nav.secondary.navbar ul.nav>li>a:hover {
@@ -3434,14 +3436,14 @@ h2 {
 	overflow: hidden;
 }
 
-.badge{
+.badge {
 	font-size: 14px !important;
 	border: 1px solid #ddd !important;
 }
 
 .card-text p {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
