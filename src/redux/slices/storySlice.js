@@ -118,9 +118,10 @@ const storySlice = createSlice({
       })
       .addCase(addStory.fulfilled, (state, action) => {
         state.loading = false;
-        state.message = action.payload.message;
+        state.message = 'Thank you! Your story has been submitted successfully. It will appear in the admin panel for review. Once approved by our team, it will be published publicly.';
         state.stories.unshift(action.payload.data);
       })
+
       .addCase(addStory.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || 'Add failed';
@@ -194,7 +195,7 @@ const storySlice = createSlice({
         state.loading = false;
         state.error = action.payload?.message || 'Failed to fetch startup stories';
       });
-}
+  }
 });
 
 export const { clearStoryMessage } = storySlice.actions;

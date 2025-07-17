@@ -37,12 +37,18 @@ const AddStory = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
+
+
   useEffect(() => {
     if (message) {
       toast.success(
         'Thank you! Your story has been submitted successfully. It will appear in the admin panel for review. Once approved by our team, it will be published publicly.',
-        { autoClose: 7000 }
+        {
+          autoClose: 5000,
+          onClose: () => router.push("/account"), // 👈 redirect after toast
+        }
       );
+
       dispatch(clearStoryMessage());
       setFormData({ title: '', description: '', category: '' });
       setStoryImage(null);
@@ -52,7 +58,8 @@ const AddStory = () => {
       toast.error(error);
       dispatch(clearStoryMessage());
     }
-  }, [message, error, dispatch]);
+  }, [message, error, dispatch, router]);
+
 
 
   const handleChange = (e) => {
@@ -99,9 +106,8 @@ const AddStory = () => {
     }
 
     dispatch(addStory(payload));
-    router.push("/account");
-  };
 
+  };
 
 
   return (
