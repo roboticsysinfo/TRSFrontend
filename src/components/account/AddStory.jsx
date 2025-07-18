@@ -8,36 +8,34 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 
-// Dynamically import the CKEditor wrapper with SSR disabled
+
 const CKEditorClient = dynamic(() => import('@/components/account/CKEditorClient'), {
   ssr: false,
 });
 
+
 const AddStory = () => {
-
-
+  
   const dispatch = useDispatch();
   const router = useRouter();
   const { categories } = useSelector((state) => state.categories);
   const { user } = useSelector((state) => state.auth);
   const { loading, message, error } = useSelector((state) => state.story);
 
-
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     category: '',
+    metaTitle: '',
+    metaDescription: '',
+    metaKeywords: '',
   });
 
-
   const [storyImage, setStoryImage] = useState(null);
-
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
-
-
 
   useEffect(() => {
     if (message) {
@@ -45,12 +43,19 @@ const AddStory = () => {
         'Thank you! Your story has been submitted successfully. Once approved by our team, it will be published publicly.',
         {
           autoClose: 5000,
-          onClose: () => router.push("/account"), // 👈 redirect after toast
+          onClose: () => router.push("/account"),
         }
       );
 
       dispatch(clearStoryMessage());
-      setFormData({ title: '', description: '', category: '' });
+      setFormData({
+        title: '',
+        description: '',
+        category: '',
+        metaTitle: '',
+        metaDescription: '',
+        metaKeywords: '',
+      });
       setStoryImage(null);
     }
 
@@ -60,15 +65,12 @@ const AddStory = () => {
     }
   }, [message, error, dispatch, router]);
 
-
-
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -79,11 +81,9 @@ const AddStory = () => {
     }
   };
 
-
   const handleSubmit = (e) => {
-
     e.preventDefault();
-    const { title, description, category } = formData;
+    const { title, description, category, metaTitle, metaDescription, metaKeywords } = formData;
 
     if (!title || !description || !category) {
       toast.warning('Please fill in all fields');
@@ -100,18 +100,18 @@ const AddStory = () => {
     payload.append('description', description);
     payload.append('category', category);
     payload.append('user', user._id);
+    payload.append('metaTitle', metaTitle);
+    payload.append('metaDescription', metaDescription);
+    payload.append('metaKeywords', metaKeywords);
 
     if (storyImage) {
       payload.append('storyImage', storyImage);
     }
 
     dispatch(addStory(payload));
-
   };
 
-
   return (
-
     <div className="container my-5">
       <div className="row d-flex justify-content-center">
         <div className="col-lg-8 col-sm-12">
@@ -134,7 +134,6 @@ const AddStory = () => {
                     onChange={handleChange}
                   />
                 </div>
-
 
                 <div className="mb-3">
                   <label htmlFor="category" className="form-label">Category</label>
@@ -171,7 +170,6 @@ const AddStory = () => {
                   )}
                 </div>
 
-
                 <div className="mb-3">
                   <label htmlFor="description" className="form-label">Description</label>
                   <CKEditorClient
@@ -182,7 +180,52 @@ const AddStory = () => {
                   />
                 </div>
 
+                <div className="mb-3">
+                  <label htmlFor="metaTitle" className="form-label">
+                    Meta Title <small>(Max 60 characters)</small>
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="metaTitle"
+                    name="metaTitle"
+                    placeholder="Enter meta title"
+                    maxLength={60}
+                    value={formData.metaTitle}
+                    onChange={handleChange}
+                  />
+                </div>
 
+                <div className="mb-3">
+                  <label htmlFor="metaDescription" className="form-label">
+                    Meta Description <small>(Max 160 characters)</small>
+                  </label>
+                  <textarea
+                    className="form-control"
+                    id="metaDescription"
+                    name="metaDescription"
+                    placeholder="Enter meta description"
+                    maxLength={160}
+                    rows={3}
+                    value={formData.metaDescription}
+                    onChange={handleChange}
+                  ></textarea>
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="metaKeywords" className="form-label">
+                    Meta Keywords <small>(Comma-separated)</small>
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="metaKeywords"
+                    name="metaKeywords"
+                    placeholder="e.g. story, inspiration, success"
+                    value={formData.metaKeywords}
+                    onChange={handleChange}
+                  />
+                </div>
 
                 <button type="submit" className="btn btn-primary" disabled={loading}>
                   {loading && (

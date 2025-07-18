@@ -62,16 +62,20 @@ const AllStories = () => {
 
           <h4 className="my-4">Categories</h4>
           <div className="d-flex flex-wrap gap-2">
-            {categories.map(cat => (
-              <span
-                key={cat._id}
-                className="badge bg-light text-dark me-2 mb-2 p-2 d-inline-block"
-                onClick={() => handleCategorySelect(cat._id)}
-                style={{ cursor: "pointer" }}
-              >
-                {cat.name}
-              </span>
-            ))}
+            {categories.map(cat => {
+              const isSelected = selectedCategory === cat._id;
+              return (
+                <span
+                  key={cat._id}
+                  className={`badge me-2 mb-2 p-2 d-inline-block ${isSelected ? 'bg-danger text-white' : 'bg-light text-dark'}`}
+                  onClick={() => handleCategorySelect(cat._id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {cat.name}
+                </span>
+              );
+            })}
+
           </div>
         </div>
 
@@ -95,19 +99,29 @@ const AllStories = () => {
                         className="text-decoration-none text-dark"
                       >
                         <div className="card h-100 shadow-sm border-0">
+
                           <img
                             src={story.storyImage || '/placeholder.jpg'}
                             className="card-img-top"
                             alt={story.title}
                             style={{ height: '180px', objectFit: 'cover' }}
                           />
+
                           <div className="card-body">
-                            <small className="text-muted d-block mb-1">
-                              {new Date(story.createdAt).toLocaleDateString('en-IN')}
-                            </small>
-                            <h6 className="fw-bold">{story.title}</h6>
+
+                            <div className='d-flex' style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                              <small className="text-muted d-block mb-1">
+                                {new Date(story.createdAt).toLocaleDateString('en-IN')}
+                              </small>
+                              <p className='mb-0 text-muted fw-bold text-small' style={{ fontSize: 12 }}>
+                                {story.user?.name}
+                              </p>
+                            </div>
+
+                            <h5 className="fw-bold">{story.title}</h5>
                             <div
                               className="card-text"
+                              style={{fontSize: 14}}
                               dangerouslySetInnerHTML={{
                                 __html: story.description.length > 150
                                   ? `${story.description.slice(0, 150)}...`
@@ -115,9 +129,10 @@ const AllStories = () => {
                               }}
                             />
 
-                            <span className="badge bg-light text-danger fw-semibold">
+                            <span className="badge bg-light text-danger fw-semibold" style={{fontSize: 12}}>
                               {story.category?.name || 'Story'}
                             </span>
+
                           </div>
                         </div>
                       </Link>
