@@ -77,16 +77,21 @@ const FooterStyle1 = ({ shape, shapeClass, logo, formStyle }) => {
                                 <div className="f-item link">
                                     <h4 className="widget-title">Our Services</h4>
                                     <ul>
+
                                         <li>
                                             <Link href="/account/list-my-company">List Startup</Link>
                                         </li>
                                         <li>
                                             <Link href="/account">Account</Link>
                                         </li>
+                                        <li>
+                                            <Link href="/interviews">Interviews</Link>
+                                        </li>
 
                                     </ul>
                                 </div>
                             </div>
+                            
                             <div className="col-lg-4 col-md-6 footer-item">
                                 <h4 className="widget-title">Newsletter</h4>
                                 <p>
@@ -100,7 +105,7 @@ const FooterStyle1 = ({ shape, shapeClass, logo, formStyle }) => {
                                     {data?.socialMedia?.map((item) => (
                                         <li key={item._id}>
                                             <a href={item.link} target="_blank" rel="noopener noreferrer">
-                                                <i className={item?.icon} style={{ fontFamily: "Font Awesome 5 Brands"}}></i>
+                                                <i className={item?.icon} style={{ fontFamily: "Font Awesome 5 Brands" }}></i>
                                             </a>
                                         </li>
                                     ))}

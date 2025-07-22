@@ -3,6 +3,7 @@ import BlogStyle1 from '@/components/blog/BlogStyle1';
 import FeaturedStartupStories from '@/components/home/FeaturedStartupStories';
 import StorySlider from '@/components/home/StorySlider';
 import TagContent from '@/components/home/TagContent';
+import HomeInterview from '@/components/interview/HomeInterview';
 
 import React from 'react';
 
@@ -24,12 +25,13 @@ const Home1 = () => {
 
                 <StorySlider sectionClass="featured-stories" />
 
+                <HomeInterview sectionClass="featured-interviews" />
 
                 <BlogStyle1 sectionClass="bg-gray" />
             </LayoutStyle7>
         </>
     );
-    
+
 };
 
 

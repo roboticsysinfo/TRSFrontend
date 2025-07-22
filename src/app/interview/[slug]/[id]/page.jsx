@@ -2,29 +2,28 @@ import React from 'react';
 import LayoutStyle7 from '@/components/Layouts/LayoutStyle7';
 import InterviewDetail from '@/components/interview/InterviewDetail';
 
-
 export async function generateMetadata({ params }) {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/single-interview/${params.id}`, {
-            next: { revalidate: 60 }, // Revalidate every 60 seconds
+            next: { revalidate: 60 },
         });
         const data = await res.json();
         const interview = data?.data;
 
         return {
-            title: interview?.title || 'interview Detail',
-            description: interview?.metaDescription || 'interview detail page',
-            keywords: interview?.metaKeywords || 'interview Keywords',
+            title: interview?.metaTitle || interview?.interviewTitle || 'Interview Detail',
+            description: interview?.metaDescription || interview?.excerpt?.slice(0, 160) || 'Interview detail page',
+            keywords: interview?.metaKeywords || 'interview, questions, answers',
         };
     } catch (error) {
+        console.error('Metadata fetch failed:', error);
         return {
-            title: 'interview Detail',
-            description: 'interview detail page',
-            keywords: interview?.metaKeywords || 'interview Keywords',
+            title: 'Interview Detail',
+            description: 'Interview detail page',
+            keywords: 'interview, questions, answers',
         };
     }
 }
-
 
 const InterviewPage = async ({ params }) => {
     const { id } = params;
@@ -32,16 +31,16 @@ const InterviewPage = async ({ params }) => {
     let interview = null;
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/single-interview/${id}`, {
-            next: { revalidate: 60 }, // Enables Incremental Static Regeneration
+            next: { revalidate: 60 },
         });
         const data = await res.json();
-        interview = data?.data.interviews;
+        interview = data?.data;
     } catch (error) {
         console.error('Failed to fetch interview:', error);
     }
 
     return (
-        <LayoutStyle7 >
+        <LayoutStyle7>
             <InterviewDetail interview={interview} />
         </LayoutStyle7>
     );

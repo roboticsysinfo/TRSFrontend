@@ -3,16 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchInterviews } from '@/redux/slices/interviewSlice';
 import slugify from 'slugify';
+import Link from 'next/link';
 
 const InterviewList = () => {
-    
+
     const dispatch = useDispatch();
     const { all: interviews, pagination, loading } = useSelector(state => state.interviews);
 
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
 
-    
+
     useEffect(() => {
         dispatch(fetchInterviews({ page, search }));
     }, [dispatch, page, search]);
@@ -67,7 +68,9 @@ const InterviewList = () => {
                                         />
                                     )}
                                     <div className="card-body d-flex flex-column">
-                                        <h4 className="card-title">{item.interviewTitle}</h4>
+                                        <Link href={`/interview/${slugify(item.interviewTitle, { lower: true })}/${item._id}`}>
+                                            <h4 className="card-title">{item.interviewTitle}</h4>
+                                        </Link>
                                         <p className="card-text text-truncate">{item.excerpt}</p>
                                         <a href={`/interview/${slugify(item.interviewTitle, { lower: true })}/${item._id}`} className="text-danger fw-bold mt-auto" style={{ fontSize: 12 }}>
                                             Read More

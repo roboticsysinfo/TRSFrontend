@@ -10,11 +10,14 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
   interviews.forEach((interview) => {
-    const slug = slugify(interview.interviewTitle || '', { lower: true, strict: true });
+    const title = interview.interviewTitle || interview.personName || 'interview';
+    const slug = slugify(title, { lower: true, strict: true });
+    const updatedAt = interview.updatedAt || interview.createdAt || new Date().toISOString();
+
     xml += `
   <url>
     <loc>${baseUrl}/story/${slug}/${interview._id}</loc>
-    <lastmod>${new Date(interview.updatedAt).toISOString()}</lastmod>
+    <lastmod>${new Date(updatedAt).toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>`;
