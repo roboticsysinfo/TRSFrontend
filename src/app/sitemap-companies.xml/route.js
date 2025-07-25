@@ -8,7 +8,9 @@ export async function GET() {
   });
 
   const json = await res.json();
-  const companies = Array.isArray(json?.data?.companies) ? json.data.companies : [];
+  const companies = Array.isArray(json?.data?.data) ? json.data.data : [];
+
+
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
