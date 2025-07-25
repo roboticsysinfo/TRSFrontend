@@ -10,14 +10,7 @@ export async function GET() {
 
     const json = await res.json();
 
-    // DEBUG: Log output to make sure we get the right response
-    console.log('✅ Full JSON from API:', JSON.stringify(json, null, 2));
-
     const stories = Array.isArray(json?.data?.stories) ? json.data.stories : [];
-
-    if (!stories.length) {
-      console.warn('⚠️ No stories found in sitemap.');
-    }
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
