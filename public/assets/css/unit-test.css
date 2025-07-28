@@ -714,7 +714,7 @@ button.btn:hover::after {
 }
 
 /* Blog Single */
-.blog-area.single .item .blog-item-box span {
+/* .blog-area.single .item .blog-item-box span {
   background-color: var(--color-primary);
   color: var(--white);
   display: inline-block;
@@ -722,7 +722,7 @@ button.btn:hover::after {
   letter-spacing: 1px;
   padding: 3px 20px;
   text-transform: uppercase;
-}
+} */
 
 .blog-area.single .item .blog-item-box h2 {
   font-weight: 600;

@@ -9,7 +9,7 @@ export async function GET() {
     '/account',
     '/terms-and-conditions',
     '/privacy-policy',
-    '/startup-stories',
+    '/shops',
     '/signin',
     '/signup',
   ];

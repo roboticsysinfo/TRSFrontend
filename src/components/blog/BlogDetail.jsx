@@ -3,17 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
-import SocialShare from '../utilities/SocialShare';
-import BlogPostComments from './BlogPostComments';
-import BlogCommentForm from '../form/BlogCommentForm';
-import SearchWidget from '../widgets/SearchWidget';
-import RecentPostsWidget from '../widgets/RecentPostsWidget';
-import CategoryWidget from '../widgets/CategoryWidget';
-import GalleryWidget from '../widgets/GalleryWidget';
-import ArchiveWidget from '../widgets/ArchiveWidget';
-import FollowWidget from '../widgets/FollowWidget';
-import TagsWidget from '../widgets/TagsWidget';
-import team2Thumb from '@/assets/img/teams/2.jpg';
 import dayjs from 'dayjs';
 import axiosInstance from '@/utils/axiosInstance';
 
@@ -105,14 +94,13 @@ const BlogDetail = ({ blog }) => {
                         </div>
 
                         {/* Sidebar */}
-                        <div className="sidebar col-xl-4 col-lg-5 col-md-12 mt-md-50 mt-xs-50">
+                        {/* <div className="sidebar col-xl-4 col-lg-5 col-md-12 mt-md-50 mt-xs-50">
                             <aside>
 
-                                <CategoryWidget />
-                                <RecentPostsWidget />
+
 
                             </aside>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
