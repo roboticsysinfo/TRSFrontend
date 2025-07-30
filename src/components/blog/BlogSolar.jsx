@@ -10,8 +10,7 @@ const BlogSolar = ({ sectionClass }) => {
                     <div className="row">
                         <div className="col-lg-8 offset-lg-2">
                             <div className="site-heading text-center">
-                                <h4 className="sub-heading">Latest Blog</h4>
-                                <h2 className="title">News & Update</h2>
+                                <h2 className="title">Latest Blogs</h2>
                                 <div className="devider"></div>
                             </div>
                         </div>

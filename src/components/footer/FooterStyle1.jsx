@@ -64,7 +64,7 @@ const FooterStyle1 = ({ shape, shapeClass, logo, formStyle }) => {
                                             <Link href="/about-us">About Us</Link>
                                         </li>
                                         <li>
-                                            <Link href="/news-blogs">News & Blogs</Link>
+                                            <Link href="/blogs">Blogs</Link>
                                         </li>
                                         <li>
                                             <Link href="/contact-us">Contact</Link>

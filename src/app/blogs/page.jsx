@@ -13,7 +13,7 @@ export const metadata = {
 const Blog3Column = () => {
     return (
         <>
-            <LayoutStyle7 breadCrumb="News & Blogs" title="News & Blogs">
+            <LayoutStyle7 breadCrumb="Blogs" title="Blogs">
                 <Blogs />
             </LayoutStyle7>
         </>
