@@ -1,10 +1,13 @@
 import React from 'react';
 
 const InterviewDetail = ({ interview }) => {
+
     if (!interview) return null;
 
     return (
+
         <div className="container my-5">
+
             {/* Title & Excerpt */}
             <h2 className="fw-bold mb-2">{interview?.interviewTitle || 'N/A'}</h2>
             <p className="text-muted fs-5 mb-4">{interview?.excerpt || 'N/A'}</p>
@@ -48,6 +51,12 @@ const InterviewDetail = ({ interview }) => {
                     ))}
                 </div>
             )}
+
+            <div
+                className="about-content"
+                dangerouslySetInnerHTML={{ __html: interview?.interviewDescription || '' }}
+                style={{ lineHeight: 1.8, fontSize: '16px', color: '#333' }}
+            />
 
 
             {/* Social Share */}
