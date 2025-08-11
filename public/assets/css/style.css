@@ -380,6 +380,9 @@ p {
     letter-spacing: 0.5px;
 }
 
+.blog-content-html p br {
+    display: none !important;
+}
 
 /* ============================================================== 
     # Helper CSS
